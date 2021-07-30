@@ -88,6 +88,7 @@ label:hover{
   overflow: hidden;
 }
 .img-wrap img{
+  opacity:0;
   min-width: 100%;
   min-height: 100%;
   max-width: 150%;
@@ -149,7 +150,7 @@ label:hover{
   height: 100%;
   background: rgba(0,0,0,0.5);
   display:flex;
-  align-items: center;
+  align-items:center;
 }
 .backdrop img{
   display: block;
@@ -165,7 +166,7 @@ label:hover{
   color:white;
   font-size:3rem;
   padding: 1rem;
-  cursor:pointer
+  cursor:pointer;
 }
 .backdrop i:first-child{
   left:12%;

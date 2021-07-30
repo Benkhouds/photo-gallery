@@ -1,11 +1,11 @@
 import {useContext} from 'react'
 import ImagesContext from '../store/images-context'
-
+import {motion, AnimatePresence} from 'framer-motion'
 export default function Carousel({clickedImageIndex,setClickedImageIndex}) {
     const {docs} = useContext(ImagesContext)
     function handleClick(e){
         if(e.target.classList.contains("backdrop")){
-            setClickedImageIndex(null)
+            setClickedImageIndex(null)        
         }
     }
     function handleLeftArrow(){
@@ -15,10 +15,19 @@ export default function Carousel({clickedImageIndex,setClickedImageIndex}) {
       setClickedImageIndex(clickedImageIndex +1);
     }
     return (
-        <div className="backdrop" onClick={handleClick}>
+        <motion.div layout className="backdrop" onClick={handleClick}
+         initial={{opacity:0}}
+         animate={{opacity:1}}
+        >
             { docs[clickedImageIndex -1] && <i className="fas fa-arrow-circle-left" onClick={handleLeftArrow}></i>}
-            <img src={docs[clickedImageIndex].url} alt="bigger pic"></img>  
-            {docs[clickedImageIndex +1 ] && <i className="fas fa-arrow-circle-right" onClick={handleRightArrow}></i>}
-        </div>
+            <AnimatePresence layout>
+                <motion.img src={docs[clickedImageIndex].url} alt="bigger pic"
+                key={docs[clickedImageIndex].url}
+                initial={{ y: "-100vw" }}
+                animate={{y:'0'}}
+                />
+            </AnimatePresence>
+            {docs[clickedImageIndex +1 ] && <motion.i className="fas fa-arrow-circle-right" onClick={handleRightArrow} layout ></motion.i>}
+        </motion.div>
     )
 }

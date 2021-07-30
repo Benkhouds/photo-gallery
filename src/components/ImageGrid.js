@@ -1,6 +1,7 @@
 import {useContext} from 'react'
 import ImagesContext from '../store/images-context'
 import { storage, db } from '../firebase/config'
+import {motion} from 'framer-motion'
 export default function ImageGrid({setClickedImageIndex}) {
    
    const  {docs} = useContext(ImagesContext)
@@ -24,15 +25,22 @@ export default function ImageGrid({setClickedImageIndex}) {
              
               {docs && docs.map((image,index)=>(
 
-                    <div key={image.id} className="img-wrap" >
-                      <img  src={image.url} alt={image.createdAt}/>
+                    <motion.div key={image.id} className="img-wrap" 
+                      layout
+                      whileHover={{opacity:1}}
+                    >
+                      <motion.img  src={image.url} alt={image.createdAt}
+                        initial={{opacity:0}}
+                        animate={{opacity:1}}
+                        transition={{delay:0.6}}
+                      />
                       <button data-id={image.id} data-url={image.url} onClick={deleteHandler}>
                           Delete Image
                         <i className="fas fa-trash-alt"></i>
                       </button>
                       <i className="fas fa-search-plus"  onClick={()=>setClickedImageIndex(index)}></i>
                       
-                    </div>
+                    </motion.div>
                    )
               )}
           

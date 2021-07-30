@@ -5,6 +5,8 @@ firebase.json
 firestore.indexes.json
 firestore.rules
 storage.rules
+/src/firebase
+.firebase/
 # dependencies
 /node_modules
 /.pnp
